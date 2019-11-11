@@ -28,7 +28,7 @@ function Data:new(data, ...)
 	
 	-- 对象初始化
 	if self._key ~= nil then
-	    memset(data, self, self._key, true, true)
+	    memcpy(data, self, self._key, true, true)
 	end
 	
 	-- 对象赋值
@@ -41,7 +41,7 @@ function Data:new(data, ...)
 		    values = {...}
         end
 		
-		memset(data, values, self._key)
+		memcpy(data, values, self._key)
     end
 
     return data
