@@ -14,7 +14,7 @@ function _dump(t, _Key)
 	end
 end
 
-function memset(_Dst, _Src, _Key, _F, _E)
+function memcpy(_Dst, _Src, _Key, _F, _E)
     _F = _F or false
     _E = _E or false
 
@@ -28,7 +28,7 @@ function memset(_Dst, _Src, _Key, _F, _E)
 			    -- assign dst with src
 			    if type(_Src[k]) == "table" then
 				    _Dst[v] = _Dst[v] == (getmetatable(_Dst))[v] and {} or _Dst[v]
-					memset(_Dst[v], _Src[k], _Dst[v][_key], _F, _E)
+					memcpy(_Dst[v], _Src[k], _Dst[v][_key], _F, _E)
 				else
 					_Dst[v] = _Src[k]
 					-- print(_Dst[v])
@@ -39,7 +39,7 @@ function memset(_Dst, _Src, _Key, _F, _E)
 				if type(_Src[v]) == "table" then
 			        _Dst[v] = _Dst[v] == (getmetatable(_Dst))[v] and {} or _Dst[v]
 					-- print(v, _Dst[v])
-					memset(_Dst[v], _Src[v], _Src[v][_key], _F, _E)
+					memcpy(_Dst[v], _Src[v], _Src[v][_key], _F, _E)
 				else
 					_Dst[v] = _Src[v]
 					-- print(_Dst[v])
@@ -61,7 +61,7 @@ function memset(_Dst, _Src, _Key, _F, _E)
 				-- print(_Src[k], _Dst[k])
 				if _Src[k] ~= nil and type(_Src[k]) == type(_Dst[k]) then
 					if type(_Src[k]) == "table" then
-						memset(_Dst[k], _Src[k], _Dst[k][_key], _F, _E)
+						memcpy(_Dst[k], _Src[k], _Dst[k][_key], _F, _E)
 					else
 						_Dst[k] = _Src[k]
 						-- print(k, _Dst[k])
@@ -75,7 +75,7 @@ function memset(_Dst, _Src, _Key, _F, _E)
 		    -- fill dst with src
 		    for k, v in ipairs(_Src) do
 			    if type(_Src[k]) == "table" then
-				    memset(_Dst[k], _Src[k], _Src[k][_key], _F, _E)
+				    memcpy(_Dst[k], _Src[k], _Src[k][_key], _F, _E)
 				else
 				    _Dst[k] = _Src[k]
 				end
