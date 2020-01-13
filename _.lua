@@ -23,7 +23,8 @@ function string:split(_Src, sep)
     sep = sep or " "
     
     for str in string.gmatch(_Src, "([^"..sep.."]+)") do
-	    table.insert(t, str)
+        assert(type(str) == "string")
+    	table.insert(t, str)
     end
     
     return t
