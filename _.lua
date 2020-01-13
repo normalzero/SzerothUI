@@ -14,6 +14,21 @@ function _dump(t, _Key)
 	end
 end
 
+function string:split(_Src, sep)
+    if type(_Src) ~= "string" then
+        return nil
+    end
+
+    local t = {}
+    sep = sep or " "
+    
+    for str in string.gmatch(_Src, "([^"..sep.."]+)") do
+	    table.insert(t, str)
+    end
+    
+    return t
+end
+
 function memcpy(_Dst, _Src, _Key, _F, _E)
     _F = _F or false
     _E = _E or false
