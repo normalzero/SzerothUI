@@ -21,17 +21,20 @@ function Data:test()
 	
 end
 
+-- you can omit some values 你可以省略实参
+-- but the assignment of every members of Data or Data's derived classes must be sorted by members order 但前提是实参依然是按类成员的顺序
+-- such as omit the last member's value or some last part of a certain member 比如省略掉最后一个成员 或省略某个成员的后几个参数
 function Data:new(data, ...)
     data = data or {}
 	setmetatable(data, self)
 	self.__index = self
 	
-	-- 对象初始化
+	-- initilize data 对象初始化
 	if self._key ~= nil then
 	    memcpy(data, self, self._key, true, true)
 	end
 	
-	-- 对象赋值
+	-- assign values 对象赋值
 	if ... then
 	    local values = {}
 		
